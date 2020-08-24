@@ -2,10 +2,10 @@ from django.shortcuts import render
 
 
 def home(request):
-    render(request, 'home.html')
+    return render(request, 'home/home.html')
 
 def about(request):
-    render(request, 'about.html')
+    return render(request, 'about.html')
 
 def contact(request):
-    render(request, 'contact.html')
+    return render(request, 'contact.html')
