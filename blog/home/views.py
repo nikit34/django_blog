@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from .models import Contact
 from django.contrib import messages
+
+from .models import Contact
+from main.models import Post
 
 
 def home(request):
     return render(request, 'home/home.html')
 
 def about(request):
-    messages.success(request, )
     return render(request, 'home/about.html')
 
 def contact(request):
@@ -23,3 +24,9 @@ def contact(request):
             contact.save()
             messages.success(request, 'Your message has been successfully sent')
     return render(request, 'home/contact.html')
+
+def search(request):
+    query = request.GET.get('query', False)
+    posts = Post.objects.filter(title__icontains=query)
+    context = {'posts': posts}
+    return render(request, 'home/search.html', context=context)
