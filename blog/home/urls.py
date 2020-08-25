@@ -8,7 +8,7 @@ from .views import (
     search,
     handle_signup,
     handle_login,
-    # handle_logout,
+    handle_logout,
 )
 
 
@@ -19,5 +19,5 @@ urlpatterns = [
     path('search', search, name='search'),
     path('signup', handle_signup, name='handle_signup'),
     path('login', handle_login, name='handle_login'),
-    # path('logout', handle_logout, name='handle_logout'),
+    path('logout', handle_logout, name='handle_logout'),
 ]

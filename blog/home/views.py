@@ -79,3 +79,8 @@ def handle_login(request):
         messages.error(request, "Invalid Credentials, please try again")
         return redirect('home')
     return render(request, 'errors/404.html')
+
+def handle_logout(request):
+    logout(request)
+    messages.success(request, "Successfully Loggout Out")
+    return redirect('home')
