@@ -6,10 +6,15 @@
 {% block body %}
 {% load humanize %}
 {% load extras %}
+{% load static %}
+
+
+<script src="{% static 'js/base.js' %}"></script>
 
 <div class="container my-3">
     <h2 class="blog-post-title">{{ post.title }}</h2>
-    <p class="blog-post-meta">{{ post.time_stamp }} by <a href="/about">{{ post.author }}</a></p>
+    <p class="blog-post-meta">{{ post.time_stamp }} by
+        <a href="/about">{{ post.author }}</a> (<span>{{post.views}} views</span>)</p>
     <p>{{ post.content|safe }}</p>
     <hr>
 </div>
@@ -22,7 +27,7 @@
             {% csrf_token %}
             <div class="form-group">
               <label>Post Comment</label>
-              <input type="text" class="form-control" name="comment" placeholder="Enter comment">
+              <input type="text" class="form-control" id="id_comment" name="comment" placeholder="Enter comment">
             </div>
             <input type="hidden" name="post_sno" value="{{ post.sno }}">
             <input type="hidden" name="parent_sno" value="">
@@ -31,7 +36,7 @@
         {% else %}
             <p>Please login to post a comment</p>
         {% endif %}
-    </div>
+
     {% for comment in comments %}
         <div class="row my-3">
             <div class="col-1 pr-0">
@@ -39,7 +44,7 @@
             </div>
             <div class="col-11">
                 <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
-                <div>{{ comment.comment }}</div>
+                <div class="preview">{{ comment.comment|safe }}</div>
                 <div class="reply mx-0 my-4">
                     {% if user.is_authenticated %}
                     <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
@@ -73,7 +78,7 @@
                                 </div>
                                 <div class="col-11">
                                     <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
-                                    <div>{{ comment.comment }}</div>
+                                    <div class="preview">{{ comment.comment|safe }}</div>
                                 </div>
                                 <br>
                             </div>
