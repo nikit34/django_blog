@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+from django.contrib.auth import login, logout, authenticate
 from .models import Contact
 from main.models import Post
 
@@ -48,11 +48,34 @@ def handle_signup(request):
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        if len(username) > 10:
+            messages.error(request, "Username must be under 10 characters")
+            return redirect('home')
+        if not username.isalnum():
+            messages.error(request, "Username should only contain letters and numbers")
+            return redirect('home')
+        if pass1 != pass2:
+            messages.error(request, "Password do not match")
+            return redirect('home')
         new_user = User.objects.create_user(username, email, pass1)
         new_user.first_name = fname
         new_user.last_name = lname
         new_user.save()
         messages.success(request, "Your account has been successfully created")
         return redirect('home')
-    else:
+    return render(request, 'errors/404.html')
+
+def handle_login(request):
+    if request.method == 'POST':
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+        user = authenticate(username=loginusername, password=loginpassword)
+
+    if user is not None:
+        login(request, user)
+        messages.success(request, "Successfully Logged In")
         return redirect('home')
+    else:
+        messages.error(request, "Invalid Credentials, please try again")
+        return redirect('home')
+    return render(request, 'errors/404.html')
