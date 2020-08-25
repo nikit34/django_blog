@@ -15,7 +15,7 @@
 </div>
 
 <div class="container">
-    <h2>{{ comments.count }} {% if comments.count > 1 %}comments {% else %} comment {% endif %}</h2>
+    <h2>{{ comments.count }} {% if comments.count > 1 %} comments {% else %} comment {% endif %}</h2>
     <p class="my-2">
         {% if user.is_authenticated %}
         <form action="/blog/post_comment" method="POST">
@@ -34,13 +34,14 @@
     </div>
     {% for comment in comments %}
         <div class="row my-3">
-            <div class="col-1">
-                <img class="rounded mx-auto d-block w-100 p-2" src="/static/img/user.png" alt="user">
+            <div class="col-1 pr-0">
+                <img class="rounded mx-auto d-block w-75 pl-2" src="/static/img/user.png" alt="user">
             </div>
             <div class="col-11">
-                <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp | naturaltime }}</span>
-                <div>{{ comment.comment }}</div>
-                <div class="reply mx-0">
+                <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
+                <div>{{ comment.comment|safe }}</div>
+                <div class="reply mx-0 my-4">
+                    {% if user.is_authenticated %}
                     <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
                         Reply
                     </button>
@@ -58,10 +59,24 @@
                             </form>
                         </div>
                     </div>
+                    {% else %}
+                    <button class="btn btn-sm btn-primary" disabled>
+                        Login to Reply
+                    </button>
+                    {% endif %}
+                    <hr>
                     <div class="replies my-2">
                         {% for reply in replyDict|get_val:comment.sno %}
-                            {{ reply }}
-                            <br>
+                            <div class="row my-2">
+                                <div class="col-1 pr-0 py-2">
+                                    <img class="rounded my-auto d-block w-75 pl-2" src="/static/img/user.png" alt="user">
+                                </div>
+                                <div class="col-11">
+                                    <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
+                                    <div>{{ comment.comment }}</div>
+                                </div>
+                                <br>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
