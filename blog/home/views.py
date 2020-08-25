@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from .models import Contact
 from main.models import Post
@@ -38,3 +39,20 @@ def search(request):
     posts = Post .objects.filter(title__icontains=query)
     context = {'posts': posts, 'query': query}
     return render(request, 'home/search.html', context=context)
+
+def handle_signup(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+        new_user = User.objects.create_user(username, email, pass1)
+        new_user.first_name = fname
+        new_user.last_name = lname
+        new_user.save()
+        messages.success(request, "Your account has been successfully created")
+        return redirect('home')
+    else:
+        return redirect('home')
