@@ -26,7 +26,13 @@ def contact(request):
     return render(request, 'home/contact.html')
 
 def search(request):
-    query = request.GET.get('query', False)
-    posts = Post.objects.filter(title__icontains=query)
-    context = {'posts': posts}
+    query = request.GET['query']
+    if len(query) > 80:
+        posts = []
+    else:
+        posts = Post.objects.filter(title__icontains=query)
+    if posts.count() == 0:
+        messages.error(request, "No search result found. Please refine your query")
+    posts = Post .objects.filter(title__icontains=query)
+    context = {'posts': posts, 'query': query}
     return render(request, 'home/search.html', context=context)
