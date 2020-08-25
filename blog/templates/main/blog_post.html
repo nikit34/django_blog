@@ -10,7 +10,7 @@
 <div class="container my-3">
     <h2 class="blog-post-title">{{ post.title }}</h2>
     <p class="blog-post-meta">{{ post.time_stamp }} by <a href="/about">{{ post.author }}</a></p>
-    <p>{{ post.content }}</p>
+    <p>{{ post.content|safe }}</p>
     <hr>
 </div>
 
@@ -39,7 +39,7 @@
             </div>
             <div class="col-11">
                 <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
-                <div>{{ comment.comment|safe }}</div>
+                <div>{{ comment.comment }}</div>
                 <div class="reply mx-0 my-4">
                     {% if user.is_authenticated %}
                     <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
