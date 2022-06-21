@@ -5,10 +5,8 @@ from .models import Post, BlogComment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    class Media:
-        js = ('/static/js/tinyInject.js',)
+    pass
 
 @admin.register(BlogComment)
 class BlogCommentAdmin(admin.ModelAdmin):
-    class Media:
-        js = ('/static/js/tinyInject.js',)
+    pass
