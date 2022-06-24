@@ -23,7 +23,7 @@
     <h2>{{ comments.count }} {% if comments.count > 1 %} comments {% else %} comment {% endif %}</h2>
     <p class="my-2">
         {% if user.is_authenticated %}
-        <form action="/blog/post_comment" method="POST">
+        <form action="/post_comment" method="POST">
             {% csrf_token %}
             <div class="form-group">
               <label>Post Comment</label>
@@ -52,7 +52,7 @@
                     </button>
                     <div class="collapse" id="replyBox{{comment.sno}}">
                         <div class="card card-body my-2">
-                            <form action="/blog/post_comment" method="POST">
+                            <form action="/post_comment" method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label for="comment">Post a Reply</label>
@@ -77,8 +77,8 @@
                                     <img class="rounded my-auto d-block w-75 pl-2" src="/static/img/user.png" alt="user">
                                 </div>
                                 <div class="col-11">
-                                    <b>{{ comment.user.username }}</b> <span class="badge badge-secondary">{{ comment.time_stamp|naturaltime }}</span>
-                                    <div class="preview">{{ comment.comment|safe }}</div>
+                                    <b>{{ reply.user.username }}</b> <span class="badge badge-secondary">{{ reply.time_stamp|naturaltime }}</span>
+                                    <div class="preview">{{ reply.comment|safe }}</div>
                                 </div>
                                 <br>
                             </div>

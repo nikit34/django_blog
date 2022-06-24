@@ -7,9 +7,6 @@ from .models import Contact
 from main.models import Post
 
 
-def home(request):
-    return render(request, 'home/home.html')
-
 def about(request):
     return render(request, 'home/about.html')
 
@@ -37,7 +34,7 @@ def search(request):
         posts = posts_title.union(posts_content)
     if posts.count() == 0:
         messages.warning(request, "No search result found. Please refine your query")
-    posts = Post .objects.filter(title__icontains=query)
+    posts = Post.objects.filter(title__icontains=query)
     context = {'posts': posts, 'query': query}
     return render(request, 'home/search.html', context=context)
 

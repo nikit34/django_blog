@@ -9,5 +9,5 @@ admin.site.site_title = "SwitchMe Panel"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('blog/', include('main.urls')),
+    path('', include('main.urls')),
 ]

@@ -1,5 +1,4 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from .views import blog_home, blog_post, post_comment
 
 urlpatterns = [
