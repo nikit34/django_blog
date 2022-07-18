@@ -48,19 +48,19 @@ def handle_signup(request):
         pass2 = request.POST['pass2']
         if len(username) > 10:
             messages.error(request, "Username must be under 10 characters")
-            return redirect('home')
+            return redirect('blog_home')
         if not username.isalnum():
             messages.error(request, "Username should only contain letters and numbers")
-            return redirect('home')
+            return redirect('blog_home')
         if pass1 != pass2:
             messages.error(request, "Password do not match")
-            return redirect('home')
+            return redirect('blog_home')
         new_user = User.objects.create_user(username, email, pass1)
         new_user.first_name = fname
         new_user.last_name = lname
         new_user.save()
         messages.success(request, "Your account has been successfully created")
-        return redirect('home')
+        return redirect('blog_home')
     return render(request, 'errors/404.html')
 
 def handle_login(request):
@@ -72,13 +72,12 @@ def handle_login(request):
     if user is not None:
         login(request, user)
         messages.success(request, "Successfully Logged In")
-        return redirect('home')
+        return redirect('blog_home')
     else:
         messages.error(request, "Invalid Credentials, please try again")
-        return redirect('home')
-    return render(request, 'errors/404.html')
+        return redirect('blog_home')
 
 def handle_logout(request):
     logout(request)
     messages.success(request, "Successfully Loggout Out")
-    return redirect('home')
+    return redirect('blog_home')
