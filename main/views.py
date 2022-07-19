@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect
 
-from .templatetags import extras
 from .models import Post, BlogComment
 
 
@@ -30,6 +30,7 @@ def blog_post(request, slug):
     }
     return render(request, 'main/blog_post.html', context=context)
 
+@csrf_protect
 def post_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.views.decorators.csrf import csrf_protect
 
 from .models import Contact
 from main.models import Post
@@ -10,6 +11,7 @@ from main.models import Post
 def about(request):
     return render(request, 'home/about.html')
 
+@csrf_protect
 def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -38,6 +40,7 @@ def search(request):
     context = {'posts': posts, 'query': query}
     return render(request, 'home/search.html', context=context)
 
+@csrf_protect
 def handle_signup(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -63,6 +66,7 @@ def handle_signup(request):
         return redirect('blog_home')
     return render(request, 'errors/404.html')
 
+@csrf_protect
 def handle_login(request):
     if request.method == 'POST':
         loginusername = request.POST['loginusername']
