@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
     'permikov134.pythonanywhere.com'
 ]
 
@@ -74,8 +75,12 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'root',
+        'PASSWORD': 'secret',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
@@ -124,7 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_ROOT = os.path.join(os.path.abspath(os.path.dirname(BASE_DIR)), 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
