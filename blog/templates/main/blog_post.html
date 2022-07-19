@@ -15,7 +15,10 @@
     <h2 class="blog-post-title">{{ post.title }}</h2>
     <p class="blog-post-meta">{{ post.time_stamp }} by
         <a href="/about">{{ post.author }}</a> (<span>{{post.views}} views</span>)</p>
-    <p>{{ post.content|safe }}</p>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="img">
+        {% endif %}
+            <p>{{ post.content|safe }}</p>
     <hr>
 </div>
 

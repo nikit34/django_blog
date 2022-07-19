@@ -122,3 +122,10 @@ STATIC_ROOT = os.path.join(os.path.abspath(os.path.dirname(BASE_DIR)), 'static_r
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, "media")
+)
+
+MEDIA_URL = 'media/'
