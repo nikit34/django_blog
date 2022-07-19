@@ -1,6 +1,6 @@
 **/__pycache__/
 **/migrations/
 **/__init__.py
-blog/db.sqlite3
-blog/media/
+db.sqlite3
+media/
 env/
