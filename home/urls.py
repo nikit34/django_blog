@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from .views import (
+    account,
     contact,
     about,
     search,
@@ -12,6 +13,7 @@ from .views import (
 
 
 urlpatterns = [
+    path('account', account, name='account'),
     path('contact', contact, name='contact'),
     path('about', about, name='about'),
     path('search', search, name='search'),

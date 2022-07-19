@@ -11,6 +11,9 @@ from main.models import Post
 def about(request):
     return render(request, 'home/about.html')
 
+def account(request):
+    return render(request, 'home/account.html')
+
 @csrf_protect
 def contact(request):
     if request.method == 'POST':
