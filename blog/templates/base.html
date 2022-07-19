@@ -24,6 +24,9 @@
       rel="stylesheet"
     />
 
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog_home.css' %}">
+
     <title>{% block title %} {% endblock title %}</title>
   </head>
   <body>

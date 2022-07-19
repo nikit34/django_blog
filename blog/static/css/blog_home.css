@@ -1,0 +1,8 @@
+.home-post-image {
+    overflow: hidden;
+    max-height: 10em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

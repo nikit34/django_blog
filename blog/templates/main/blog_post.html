@@ -15,21 +15,26 @@
     <h2 class="blog-post-title">{{ post.title }}</h2>
     <p class="blog-post-meta">{{ post.time_stamp }} by
         <a href="/about">{{ post.author }}</a> (<span>{{post.views}} views</span>)</p>
-        {% if post.image %}
-            <img src="{{ post.image.url }}" alt="img">
-        {% endif %}
-            <p>{{ post.content|safe }}</p>
+        <div class="row">
+            {% if post.image %}
+                <div class="col">
+                    <img src="{{ post.image.url }}" alt="img">
+                </div>
+            {% endif %}
+            <div class="col">
+                <p>{{ post.content|safe }}</p>
+            </div>
+        </div>
     <hr>
 </div>
 
 <div class="container">
-    <h2>{{ comments.count }} {% if comments.count > 1 %} comments {% else %} comment {% endif %}</h2>
+    <label>{{ comments.count }} {% if comments.count > 1 %} comments {% else %} comment {% endif %}</label>
     <p class="my-2">
         {% if user.is_authenticated %}
         <form action="/post_comment" method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <label>Post Comment</label>
               <input type="text" class="form-control" id="id_comment" name="comment" placeholder="Enter comment">
             </div>
             <input type="hidden" name="post_sno" value="{{ post.sno }}">

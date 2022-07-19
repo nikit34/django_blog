@@ -12,19 +12,21 @@
 
 <div class="container my-3">
     {% for post in posts %}
-        <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              Article by <strong class="d-inline-block mb-2 text-primary">{{ post.author }}</strong> ( {{ post.views }} views)
-              <h3 class="mb-0">{{ post.title }}</h3>
-              <div class="mb-1 text-muted">{{ post.datetime }}</div>
+        <div class="row border border-dark py-3 my-3 rounded shadow-sm">
+            <div class="col">
+              Article by <strong class="text-primary">{{ post.author }}</strong> ({{ post.views }} views)
+              <h3 class="mt-3">{{ post.title }}</h3>
+              <div class="mb-2">{{ post.datetime }}</div>
               <p class="card-text mb-auto"><div class="preview">{{ post.content|safe|truncatechars:400 }}</div></p>
               <div class="my-2">
                 <a href="/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
               </div>
             </div>
-            <div class="col-auto d-none d-lg-block">
-
-            </div>
+            {% if post.image %}
+              <div class="col home-post-image mx-3">
+                <img src="{{ post.image.url }}">
+              </div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
