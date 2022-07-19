@@ -11,7 +11,26 @@
 </div>
 
 <div class="container">
-  
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-body">
+                <a class="btn btn-primary" href="{% url 'blog_home' %}">Back</a>
+                <hr>
+                <h5 style="text-align: center;">Account</h5>
+                <hr>
+                <img src="media/{{ request.user.account.avatar }}"">
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card card-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-primary" type="submit" value="Update">
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock body %}

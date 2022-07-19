@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.csrf import csrf_protect
 
 from .models import Contact
+from .forms import CustomerForm
 from main.models import Post
 
 
@@ -12,7 +13,13 @@ def about(request):
     return render(request, 'home/about.html')
 
 def account(request):
-    return render(request, 'home/account.html')
+    account = request.user.account
+    form = CustomerForm(instance=account)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=account)
+        if form.is_valid():
+            form.save()
+    return render(request, 'home/account.html', {'form': form})
 
 @csrf_protect
 def contact(request):
