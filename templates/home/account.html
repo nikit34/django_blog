@@ -14,9 +14,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card card-body">
-                <a class="btn btn-primary" href="{% url 'blog_home' %}">Back</a>
-                <hr>
-                <h5 style="text-align: center;">Account</h5>
+                <h5 style="text-align: center;">{{ request.user.account.name|title }}</h5>
                 <hr>
                 <img src="media/{{ request.user.account.avatar }}"">
             </div>
@@ -26,7 +24,10 @@
                 <form method="POST" action="{% url 'account' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input class="btn btn-primary" type="submit" value="Update">
+                    <div class="raw">
+                        <a class="btn btn-primary" href="{% url 'blog_home' %}">Back</a>
+                        <input class="btn btn-primary" type="submit" value="Update">
+                    </div>
                 </form>
             </div>
         </div>
