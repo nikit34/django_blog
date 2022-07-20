@@ -4,9 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-admin.site.site_header = "SwitchMe"
-admin.site.index_title = "SwitchMe"
-admin.site.site_title = "SwitchMe Panel"
+admin.site.site_header = "Magazine"
+admin.site.index_title = "Magazine"
 
 urlpatterns = [
     path('admin', admin.site.urls),
