@@ -1,0 +1,5 @@
+.avatar {
+    clip-path: circle();
+    min-height: 3em;
+    min-width: 4em;
+}
