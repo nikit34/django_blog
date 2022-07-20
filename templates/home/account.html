@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-9">
             <div class="card card-body">
-                <form method="POST" action="">
+                <form method="POST" action="{% url 'account' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <input class="btn btn-primary" type="submit" value="Update">

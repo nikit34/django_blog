@@ -9,7 +9,7 @@ admin.site.index_title = "SwitchMe"
 admin.site.site_title = "SwitchMe Panel"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('', include('home.urls')),
     path('', include('main.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
